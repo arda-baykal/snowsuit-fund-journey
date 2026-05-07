@@ -65,14 +65,14 @@
             margin-bottom: 24px;
         }
         .mermaid { text-align: center; }
-        .questions {
+        .questions, .context {
             background: white;
             border-radius: 12px;
             padding: 28px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             margin-bottom: 24px;
         }
-        .questions h2 {
+        .questions h2, .context h2 {
             color: #0F3656;
             margin-top: 0;
             font-size: 20px;
@@ -86,32 +86,13 @@
             margin-bottom: 20px;
             line-height: 1.5;
         }
-        .questions ol {
-            padding-left: 20px;
-        }
+        .questions ol { padding-left: 20px; }
         .questions li {
             margin-bottom: 14px;
             font-size: 14px;
             line-height: 1.6;
         }
-        .questions li strong {
-            color: #0F3656;
-        }
-        .context {
-            background: white;
-            border-radius: 12px;
-            padding: 28px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            margin-bottom: 24px;
-        }
-        .context h2 {
-            color: #0F3656;
-            margin-top: 0;
-            font-size: 20px;
-            border-bottom: 2px solid #28BCB8;
-            padding-bottom: 8px;
-            display: inline-block;
-        }
+        .questions li strong { color: #0F3656; }
         .context h3 {
             color: #0F3656;
             font-size: 15px;
@@ -138,6 +119,14 @@
             margin-top: 12px;
             color: #0F3656;
         }
+        .version-pill {
+            display: inline-block;
+            background: rgba(255,255,255,0.18);
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            margin-top: 6px;
+        }
     </style>
 </head>
 <body>
@@ -145,11 +134,12 @@
 
     <div class="header">
         <h1>The Snowsuit Fund — Intake to Distribution Journey</h1>
-        <p>Proposed Mareto workflow · Prepared by HelpSeeker Technologies · April 24, 2026 · v01 draft</p>
+        <p>Proposed Mareto workflow · Prepared by HelpSeeker Technologies</p>
+        <div class="version-pill">Draft v02 · for review</div>
     </div>
 
     <div class="how-to-read">
-        <strong>How to read this:</strong> this diagram is a <em>draft</em> of what we think your Mareto system will look like, based on the kick-off conversation on April 21. Colors show who is doing what at each step — your families, the system doing automated things, your staff, your depot team, and so on. Please review, challenge anything that doesn't match how you work, and bring the list of questions at the bottom to our next conversation. It's much easier to sort out the shape of things <em>before</em> we start building, so this is the moment.
+        <strong>How to read this:</strong> the diagram below describes the proposed Mareto workflow for the Snowsuit Fund — from a family submitting an intake form through to depot pickup, exchange, and reporting. Colors mark who is doing what at each step. Please review and challenge anything that doesn't match how you operate. The list of open questions at the bottom captures the items still requiring your team's direction.
     </div>
 
     <div class="legend">
@@ -159,7 +149,7 @@
         <div class="legend-item"><div class="legend-dot" style="background:#F3E5F5;border:2px solid #9C27B0"></div> Depot / Distribution</div>
         <div class="legend-item"><div class="legend-dot" style="background:#FCE4EC;border:2px solid #E91E63"></div> Exchange</div>
         <div class="legend-item"><div class="legend-dot" style="background:#FFF8E1;border:2px solid #FFC107"></div> Reporting / Inventory</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#FFEBEE;border:2px solid #F44336"></div> Rejected / Blocked</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#FFEBEE;border:2px solid #F44336"></div> Form returned (validation only)</div>
     </div>
 
     <div class="diagram-container">
@@ -168,82 +158,88 @@ flowchart TD
     F1["1 · FAMILY or AGENCY starts online intake
     Bilingual form (English / French)"]
     F2["2 · FILLS OUT FORM
-    Parents · Children (name, DOB, gender)
-    Address · Phone · Email · Referral source"]
-    F3["3 · UPLOADS ELIGIBILITY DOCUMENT
-    Ontario Works letter · ODSP statement
-    CRA Canada Child Benefit notice · Other"]
+    Parent 1 (mandatory) · Parent 2 (mandatory if two parents)
+    Children (name, DOB, gender) · Address · Phone · Email
+    Referral source · Have you been here before? · How did you hear?"]
+    F3["3 · UPLOADS ELIGIBILITY DOCUMENTS
+    Ontario Works · ODSP · CRA Canada Child Benefit
+    Newcomer (refugee form / work permit / PR confirmation — code 303)
+    Plus proof of children's birth dates and proof of address"]
     F4["4 · SELECTS APPOINTMENT SLOT
     30-min slots · up to 10 families per slot
     Seasonal calendar — open from mid-August"]
 
     S1{"5 · AUTO FORM VALIDATION
-    Required fields · Postal code · Email format"}
-    S1_BAD["↩ Form returned to family
-    Missing or invalid fields"]
+    Required fields · K-prefix postal code (Ottawa only)
+    Email format · Automatic duplicate check
+    (last name + DOB + address)"}
+    S1_BAD["Form returned to family
+    Missing/invalid fields, wrong region, or duplicate detected"]
     S2["6 · SLOT MARKED PENDING
-    Blocked from other families
-    Submission enters staff review queue"]
-    S2_DUPL["⚠ DUPLICATE FLAG
-    Last name + DOB or Last name + postal code
-    Staff merges or confirms new record"]
+    Held from other families · enters staff review queue"]
 
     St1["7 · STAFF REVIEWS SUBMISSION
-    Checks eligibility document
-    Reviews duplicate flag if any"]
-    St2{"8 · APPROVE or REJECT?"}
-    St2_REJ["✗ REJECTED
-    Slot released · Family notified
-    Reason logged for tracking"]
-    St3["9 · APPROVED
-    Confirmation email to family + referring agency
-    Slot locked · Family record activated"]
+    Verifies eligibility documents
+    Confirms identity details and any duplicate edge-cases"]
+    St2{"8 · APPROVED or APPROVED WITH CLARIFICATION?"}
+    St3["9a · APPROVED
+    Confirmation email · order number · appointment locked
+    Reminder: bring 1 piece of personal ID on the day"]
+    St4["9b · APPROVED WITH CLARIFICATION
+    Confirmation email · order number · appointment locked
+    PLUS list of accepted documents and how to obtain them"]
 
     D1["10 · FAMILY ARRIVES AT DEPOT
-    Staff pulls up the pre-approved record"]
+    Staff pulls up the pre-approved record
+    Family presents 1 piece of personal ID"]
     D2["11 · ORDER AUTO-GENERATED
-    Suggested size per child
-    (child's DOB + age rule + last year's size + 1)"]
+    Suggested size per child (DOB + age rule;
+    last year's size + 1 for returning families)"]
     D3["12 · STAFF ADJUSTS AT COUNTER
-    Actual size taken may differ
-    Staff updates size on the fly"]
+    Actual size taken may differ from the suggestion
+    Server updates the size on the fly"]
     D4["13 · ORDER FINALIZED
-    Inventory deducted from stock
-    Receipt printed · $10 fee per snowsuit (waivable)"]
+    Inventory deducted · receipt printed
+    $10 fee per snowsuit (waivable, tracked paid vs waived)
+    Partial pickup supported — items marked picked vs outstanding
+    within the same order; no new order numbers"]
     D5["14 · FAMILY HISTORY UPDATED
-    Size taken · Year · Staff initials recorded"]
+    Items taken · year · staff initials recorded
+    Outstanding items remain visible on the same order"]
 
-    E1["🔄 EXCHANGE
+    E1["EXCHANGE
     Family returns for a different size
-    New line item linked to original order
-    Inventory adjusted"]
+    Search by order number · existing line item updated to the new size
+    Inventory adjusts (returned size back into stock, new size out)"]
 
-    R1["📊 LIVE REPORTING
-    Daily distribution · On-hand vs committed
-    Year-over-year · By size / gender / referral
+    R1["LIVE REPORTING
+    Daily distribution · on-hand vs committed
+    Annual cycle April 1 – March 31 (with date filters)
+    By size / gender / referral · paid vs waived breakdown
     Request vs approval rate"]
 
-    I1["📦 INVENTORY MANAGEMENT
-    Receive deliveries · Low-stock alerts
-    Separate boys' and girls' jackets
-    Admin-only access (Joanne)"]
+    I1["INVENTORY MANAGEMENT
+    Receive deliveries · low-stock alerts
+    Jackets separated by gender (boys / girls)
+    Existing item codes preserved (e.g. S002F, S002M)
+    Admin-only access"]
 
     F1 --> F2 --> F3 --> F4 --> S1
-    S1 -->|"Invalid"| S1_BAD
+    S1 -->|"Invalid or duplicate"| S1_BAD
     S1_BAD --> F2
     S1 -->|"Valid"| S2
-    S2 --> S2_DUPL
-    S2_DUPL --> St1
+    S2 --> St1
     St1 --> St2
-    St2 -->|"Reject"| St2_REJ
-    St2 -->|"Approve"| St3
-    St3 --> D1 --> D2 --> D3 --> D4 --> D5
+    St2 -->|"All documents OK"| St3
+    St2 -->|"Some documents missing"| St4
+    St3 --> D1
+    St4 --> D1
+    D1 --> D2 --> D3 --> D4 --> D5
     D5 --> R1
     D4 -.->|"Days or weeks later"| E1
     E1 --> D4
     D4 -.-> I1
     I1 --> R1
-    St2_REJ -.->|"Family can resubmit"| F1
 
     classDef family fill:#E8F4FD,stroke:#2196F3,stroke-width:2px,color:#1565C0
     classDef system fill:#FFF3E0,stroke:#FF9800,stroke-width:2px,color:#E65100
@@ -254,9 +250,9 @@ flowchart TD
     classDef exchange fill:#FCE4EC,stroke:#E91E63,stroke-width:2px,color:#880E4F
 
     class F1,F2,F3,F4 family
-    class S1,S2,S2_DUPL system
-    class St1,St2,St3 staff
-    class St2_REJ,S1_BAD blocked
+    class S1,S2 system
+    class St1,St2,St3,St4 staff
+    class S1_BAD blocked
     class D1,D2,D3,D4,D5 depot
     class E1 exchange
     class R1,I1 reporting
@@ -264,50 +260,45 @@ flowchart TD
     </div>
 
     <div class="context">
-        <h2>The big decision captured here</h2>
-        <p>In our kick-off conversation on April 21, there was a tension between two ideas:</p>
-        <ul>
-            <li><strong>Oscar's view:</strong> ideally the form itself should filter applicants — block people from booking if they haven't proven eligibility, so staff only see qualified requests.</li>
-            <li><strong>Joanne's view:</strong> don't block anyone from booking — many families are newcomers with language and tech barriers, and if they can't book online they will just walk into the depot, making things worse.</li>
-        </ul>
-        <p>The model shown above is the middle path we landed on together: <strong>every family who submits the form gets a pending appointment slot</strong>, and <strong>Snowsuit Fund staff review and approve (or reject) before the appointment is confirmed</strong>. Nobody gets turned away at the form. The filter happens at step 8, done by your staff, the day before the appointment — not at the depot, and not automatically by the system.</p>
+        <h2>How the workflow handles key decisions</h2>
+        <p><strong>Nobody is rejected through staff review.</strong> Every family who books a slot gets the appointment. The only decision your staff makes is which confirmation email goes out — full confirmation, or confirmation plus a list of documents to bring on the day. The slot is locked either way.</p>
+        <p>The only place a submission is returned automatically is at step 5, and only for hard validation reasons: missing mandatory fields, a non-Ottawa postal code, or a clear duplicate (last name + date of birth + address all match an existing family).</p>
         <div class="callout">
-            This was Oscar's good question on metrics, and it shows up in the "request vs approval rate" figure in the reporting dashboard. Over time that number tells you how well the intake form is guiding families toward the right documents.
+            Staff make a soft routing decision between two emails; the slot is locked in either case.
         </div>
-        <h3>What's been carried through from your current process</h3>
+        <h3>Operational details</h3>
         <ul>
-            <li><strong>30-minute slots with 10 families per slot</strong> — same structure you run today on WordPress.</li>
-            <li><strong>Suggested size by child's age</strong> (e.g. newborn → 6-month) with last-year's-size-plus-one for returning families.</li>
-            <li><strong>Point-of-sale model at the depot</strong> — staff adjusts the actual size taken before the sale finalizes, inventory only drops when finalized.</li>
-            <li><strong>$10 service fee per snowsuit</strong>, waivable for shelter families.</li>
-            <li><strong>Exchange flow</strong> preserved for families who come back later for a different size.</li>
-            <li><strong>Family ID and Order number</strong> carried over from the legacy VT220 system so returning families can still be looked up the same way.</li>
-        </ul>
-        <h3>What's new or different</h3>
-        <ul>
-            <li><strong>One system, not three.</strong> Today, the booking, the paper referral form, and the Linux terminal are all disconnected. In Mareto, a family submits once and it flows through.</li>
-            <li><strong>Document verification moves from the depot floor to staff desks.</strong> Your team reviews uploaded documents the day before the appointment, not while the family is standing in line.</li>
-            <li><strong>Duplicate detection</strong> on submission or on staff approval — combinations of last name + date of birth, last name + postal code, or address.</li>
-            <li><strong>Children's names collected on the form</strong> — we weren't collecting them before, but this helps clarify the form for parents (who sometimes enter their children's names in the parent fields) and improves duplicate detection.</li>
-            <li><strong>Live dashboards</strong> replace the Excel worksheets Joanne builds by hand.</li>
-            <li><strong>Separate boys' and girls' jacket inventory</strong>, per Joanne's request.</li>
+            <li>30-minute appointment slots, up to 10 families per slot. Seasonal calendar opens mid-August.</li>
+            <li>Suggested size by child's age, with last year's size plus one for returning families.</li>
+            <li>Point-of-sale model at the depot — server adjusts the size taken before the sale finalizes; inventory only drops when the sale finalizes.</li>
+            <li>$10 service fee per snowsuit, waivable per family. Daily reporting tracks paid vs waived.</li>
+            <li>Family ID and order numbers preserved so returning families can be looked up the same way as today.</li>
+            <li>Annual campaign cycle April 1 – March 31, with date filters available for ad-hoc reporting.</li>
+            <li>Volunteers handle pickups at the counter and only see family name and order details — no database access.</li>
+            <li>Existing inventory item codes preserved (e.g. S002F, S002M); jackets restructured to be split by gender.</li>
+            <li>Parent 1 / Parent 2 naming on the form — gender-neutral; Parent 2 mandatory only when there are two parents.</li>
+            <li>Newcomer eligibility category — refugee form, work permit, or PR confirmation (code 303).</li>
+            <li>Postal code hard-restricted to Ottawa K-prefix at the validation step.</li>
+            <li>Personal ID required at depot pickup for identity verification.</li>
+            <li>Two confirmation email types: full confirmation, or confirmation plus a list of accepted documents and how to obtain them.</li>
+            <li>Partial pickups handled within the same order — items marked picked vs outstanding; no new order numbers, no suffix codes. The follow-up printout shows only outstanding items so volunteers don't double-distribute.</li>
+            <li>Exchanges edit the existing line item; inventory adjusts automatically (returned size back into stock, new size out).</li>
+            <li>Inactive flag instead of deletion for old family records, with auto-flagging after a defined idle period (threshold to be confirmed).</li>
+            <li>Returning-family flag on the form ("Have you been here before?" plus "How did you hear about us?") for board reporting.</li>
         </ul>
     </div>
 
     <div class="questions">
-        <h2>Questions for your team to think through</h2>
-        <p class="intro">These are the spots where we need your direction before we start configuring. No right answers — just pick what feels right for how your team actually works. If you're unsure, flag it and we'll talk through it on the next call.</p>
+        <h2>Open questions for your team</h2>
+        <p class="intro">These are the items still requiring your team's direction before we begin building. Please discuss internally and bring the answers when we reconnect for the build walkthrough.</p>
         <ol>
-            <li><strong>Rejection path.</strong> When staff reject an application at step 8, should the family get an email explaining <em>why</em> and telling them what they'd need to resubmit — or just a generic "your application was not approved" message?</li>
-            <li><strong>Auto-approval for clear cases?</strong> If an Ontario Works letter is uploaded (which auto-qualifies), do you still want every application to go through staff review — or would you trust the system to auto-approve those and only route the trickier CRA Child Benefit cases to staff? Joanne, this is your call — safer to review all, faster to auto-approve the easy ones.</li>
-            <li><strong>CRA download helper.</strong> Families often struggle to find their Canada Child Benefit notice in the CRA My Account portal. Do you want us to embed a short step-by-step guide (in English and French) right next to the upload field, so families can walk through it at home? Possibly a short video, per Travis's suggestion.</li>
-            <li><strong>Referral agencies.</strong> When an agency submits on behalf of a family, should they use the same public form (tagged with agency name), or do they need their own login so they can see the status of the families they've referred?</li>
-            <li><strong>Children's names.</strong> Arda suggested collecting first names for each child (helps duplicate detection and clarifies the form for parents). Any concerns from Joanne or Cheryl on this?</li>
-            <li><strong>Exchange authority.</strong> When a family comes back to exchange a snowsuit, should every staff member be able to process it, or is that a more limited role? You mentioned Wendy tends to do exchanges today.</li>
-            <li><strong>What's on the day-of dashboard?</strong> When staff open Mareto first thing in the morning, what do they most need to see? A list of today's approved appointments, pending reviews, low-stock alerts, yesterday's distribution — which three would be most useful at a glance?</li>
-            <li><strong>Languages on the front-facing form.</strong> Bilingual English / French is confirmed. Cheryl mentioned Arabic being common at the depot. Do you want Arabic as a third form option at launch, or leave it for phase 2 once the core is running?</li>
-            <li><strong>Postal code boundary.</strong> Do you want the form to warn families whose postal code is outside Ottawa (K1 range), or just accept and let staff sort it out during review?</li>
-            <li><strong>Blocking specific days.</strong> You mentioned wanting to block slots for holidays or vacation. Who should be able to do that — just Joanne, or any staff member?</li>
+            <li><strong>Daily dashboard.</strong> When staff open Mareto first thing in the morning, what do they most need to see? Today's approved appointments, pending reviews, low-stock alerts, yesterday's distribution — which three would be most useful at a glance?</li>
+            <li><strong>Arabic on the public form.</strong> Bilingual English / French is confirmed. Arabic is common at the depot. Add Arabic at launch, or leave it for a later phase once the core is stable?</li>
+            <li><strong>Inactive threshold.</strong> After how many years of no activity should a family record be auto-flagged inactive? Five, seven, ten, fifteen — please confirm a number.</li>
+            <li><strong>Returning families with updated info.</strong> When a family comes back with a new address or phone, do you want a flag on the main form ("have you been here before — has anything changed?"), or a separate "update your information" path?</li>
+            <li><strong>Slot capacity changes.</strong> Day-to-day adjustments (e.g. five at lunch, ten the rest of the day) require our involvement to reconfigure. Do you anticipate this regularly, or is it rare? Routine blocking of full days is in your hands either way.</li>
+            <li><strong>Confirmation email copy.</strong> Please share your current "thanks for booking" email template so we can mirror the language exactly in the two new email types (full confirmation and confirmation-with-clarification).</li>
+            <li><strong>Size chart for first-time families.</strong> The age-to-size mapping (newborn → 6 months, etc.) — please send it once available. We'll use it as the auto-suggestion logic for new families.</li>
         </ol>
     </div>
 
